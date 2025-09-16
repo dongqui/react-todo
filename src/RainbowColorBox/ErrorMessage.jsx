@@ -1,9 +1,5 @@
-function ErrorMessage() {
-  return (
-    <>
-      <p>무지개 색이 아닌데요!!??</p>
-    </>
-  );
+function ErrorMessage({ message }) {
+  return message ? <p>{message}</p> : null;
 }
 
 export default ErrorMessage;
