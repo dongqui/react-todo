@@ -2,9 +2,14 @@ import ColorBox from "./ColorBox";
 
 import "./App.css";
 import { useState } from "react";
+import ResetButton from "./ResetButton";
 
 function App() {
   const [color, setColor] = useState("");
+
+  const handleReset = () => {
+    setColor("");
+  };
 
   return (
     <div className="App">
@@ -18,6 +23,7 @@ function App() {
         />
       </div>
       <ColorBox color={color} />
+      <ResetButton onReset={handleReset} />
     </div>
   );
 }
