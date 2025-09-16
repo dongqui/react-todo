@@ -1,7 +1,10 @@
 import ColorBox from './ColorBox';
 import ResetButton from './ResetButton';
+import ErrorMessage from './ErrorMessage';
 import './App.css';
 import { useState } from 'react';
+
+const rainbow = ['red', 'orange', 'yellow', 'green', 'blue', 'navy', 'purple'];
 
 function App() {
   const [color, setColor] = useState('');
@@ -22,6 +25,7 @@ function App() {
       </div>
       <ColorBox color={color} />
       <ResetButton onClick={handleOnClick} />
+      {rainbow.includes(color) ? null : <ErrorMessage />}
     </div>
   );
 }
