@@ -1,10 +1,8 @@
-let id = 0;
-
-export default function TodoInput() {
+export default function TodoInput({ todo, setTodo, addTodo }) {
   return (
     <>
-      <input />
-      <button>입력</button>
+      <input value={todo} onChange={(e) => setTodo(e.target.value)} />
+      <button onClick={addTodo}>입력</button>
     </>
   );
 }
