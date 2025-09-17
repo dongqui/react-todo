@@ -20,15 +20,14 @@ function App() {
 
   //에러 메세지 : 무지개색 아닐 경우
   const handleError = ({inputValue}) => {
-    //무지개색 배열로 정리
-    const rainbows = ['red', 'yellow', 'orange', 'green', 'blue', 'purple']
     //무지개색이 아닐경우 함수 작동
     if(inputValue.includes(rainbows)){
-      return ??
-      // 뭘 리턴 하는건지 모르겠음
+      return <ErrorMessage />
     }
   }
 
+  //무지개색 배열로 정리
+  const rainbows = ['red', 'yellow', 'orange', 'green', 'blue', 'purple']
   return (
     <div className="App">
       <h1>무지개색 상자</h1>
@@ -36,8 +35,12 @@ function App() {
         <input value={inputValue} onChange={handleInput}/>
       </div>
       <ColorBox color={inputValue}/>
+
       <ResetButton handleReset={handleReset} />
-      <ErrorMessage />
+      <div>
+        { rainbows.includes(inputValue) ? '' :  <ErrorMessage />}
+      </div>
+      
     </div>
   );
 }
