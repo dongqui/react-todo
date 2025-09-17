@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function TodoInput({ onClick }) {
+export default function TodoInput({ createClick }) {
   const [input, setInput] = useState('');
 
   function handleInput(e) {
@@ -12,7 +12,7 @@ export default function TodoInput({ onClick }) {
       <input onChange={handleInput} value={input} />
       <button
         onClick={() => {
-          onClick(input);
+          createClick(input);
           setInput('');
         }}
       >
