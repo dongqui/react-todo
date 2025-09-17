@@ -18,14 +18,6 @@ function App() {
     setInputValue('');
   }
 
-  //에러 메세지 : 무지개색 아닐 경우
-  const handleError = ({inputValue}) => {
-    //무지개색이 아닐경우 함수 작동
-    if(inputValue.includes(rainbows)){
-      return <ErrorMessage />
-    }
-  }
-
   //무지개색 배열로 정리
   const rainbows = ['red', 'yellow', 'orange', 'green', 'blue', 'purple']
   return (
