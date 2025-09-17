@@ -2,11 +2,11 @@ import { useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 
+let id = 0;
+
 export default function App() {
   const [todo, setTodo] = useState("");
   const [todoList, setTodoList] = useState([]);
-
-  let id = 0;
 
   const addTodo = () => {
     if (todo.trim() === "") return;
