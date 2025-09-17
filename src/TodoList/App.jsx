@@ -15,8 +15,8 @@ export default function App() {
     setTodo("");
   };
 
-  const deleteTodo = (index) => {
-    setTodoList((todoList) => todoList.filter((_, i) => i !== index));
+  const deleteTodo = (id) => {
+    setTodoList((todoList) => todoList.filter((item) => item.id !== id));
   };
 
   return (
@@ -24,11 +24,10 @@ export default function App() {
       <TodoInput todo={todo} setTodo={setTodo} addTodo={addTodo} />
       <ul>
         {todoList.length > 0 ? (
-          todoList.map((todoItem, index) => (
+          todoList.map((todoItem) => (
             <TodoItem
               key={todoItem.id}
               todoItem={todoItem}
-              index={index}
               deleteTodo={deleteTodo}
             />
           ))
