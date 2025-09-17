@@ -15,13 +15,22 @@ export default function App() {
     setTodo("");
   };
 
+  const deleteTodo = (index) => {
+    setTodoList((todoList) => todoList.filter((_, i) => i !== index));
+  };
+
   return (
     <div>
       <TodoInput todo={todo} setTodo={setTodo} addTodo={addTodo} />
       <ul>
         {todoList.length > 0 ? (
           todoList.map((todoItem, index) => (
-            <TodoItem key={todoItem.id} todoItem={todoItem} />
+            <TodoItem
+              key={todoItem.id}
+              todoItem={todoItem}
+              index={index}
+              deleteTodo={deleteTodo}
+            />
           ))
         ) : (
           <p>할 일이 없습니다.</p>
