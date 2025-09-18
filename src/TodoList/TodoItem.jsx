@@ -52,32 +52,34 @@ function EditToDoList({
 }) {
   return (
     <>
-      <input
-        type="text"
-        value={editValue}
-        onChange={(e) => {
-          setEditValue(e.target.value);
-        }}
-      />
+      <li>
+        <input
+          type="text"
+          value={editValue}
+          onChange={(e) => {
+            setEditValue(e.target.value);
+          }}
+        />
 
-      <button
-        onClick={() => {
-          // 버튼 클릭 시 todo 배열의 원래 값과 내가 선택한 요소의 값이 같으면 내가 수정한 값으로 변경
-          setTodo(
-            todo.map((original) => (original === item ? editValue : original))
-          );
-          setIsEditing(false);
-        }}
-      >
-        확인
-      </button>
-      <button
-        onClick={() => {
-          setIsEditing(false);
-        }}
-      >
-        취소
-      </button>
+        <button
+          onClick={() => {
+            // 버튼 클릭 시 todo 배열의 원래 값과 내가 선택한 요소의 값이 같으면 내가 수정한 값으로 변경
+            setTodo(
+              todo.map((original) => (original === item ? editValue : original))
+            );
+            setIsEditing(false);
+          }}
+        >
+          확인
+        </button>
+        <button
+          onClick={() => {
+            setIsEditing(false);
+          }}
+        >
+          취소
+        </button>
+      </li>
     </>
   );
 }
