@@ -1,10 +1,11 @@
+
 let id = 0;
 
-export default function TodoInput() {
+export default function TodoInput({inputValue,onChange,onClick}) {
   return (
     <>
-      <input />
-      <button>입력</button>
+      <input value={inputValue} onChange={onChange}/>
+      <button onClick={onClick}>입력</button>
     </>
   );
 }
