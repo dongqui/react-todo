@@ -1,6 +1,4 @@
-// let id = 0;
-
-export default function TodoInput({item, onChange, onClick}) {
+export default function TodoInput({onChange, onClick, item}) {
   return (
     <>
       <input onChange={onChange} value={item} />

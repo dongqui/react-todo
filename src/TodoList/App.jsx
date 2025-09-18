@@ -4,22 +4,36 @@
 
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
-import {useState, useRef} from "react"
+import {useState, useRef} from "react";
+
+const mockData = [];
 
 export default function App() {
-  const [item, setItem] = useState("")
-  
-  // let idRef = useRef(2)
+  const [list, setList] = useState(mockData);
+  const [item, setItem] = useState('');
 
-  const onChangeInput = (e) => {
-    setItem(e.target.value)
+  const idRef = useRef(2);
+
+  const onChangeContent = (e) => {
+    setItem(e.target.value);
   };
+
+  const onClickButton = () =>{
+    setList([
+      ...list,
+      { 
+        id:idRef.current++,
+        content:item,
+      }
+    ]);
+    setItem('');
+  }
 
   return (
     <div>
-      <TodoInput onChange={onChangeInput} onClick={()=>{}} item={item}/>
+      <TodoInput onChange={onChangeContent} onClick={onClickButton} item={item}/>
       <ul>
-        <TodoItem />
+        {list.map((item)=><TodoItem key={item.id} item={item.content}/>)}
       </ul>
     </div>
   );
