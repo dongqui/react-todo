@@ -11,8 +11,6 @@ export default function App() {
       const newToDo = input;
       setTodo([...todo, newToDo]);
     }
-    //❓ 이 else가 굳이 필요할까요???
-    else return;
   }
 
   //filter 함수로 리스트의 값과 일치하지 않는 목록들만 가지고 재렌더링 유도
@@ -25,8 +23,16 @@ export default function App() {
     <div>
       <TodoInput createClick={handleOnClick} />
       <ul>
-        {todo.map((item, i) => {
-          return <TodoItem deleteClick={handleDelete} item={item} key={item} />;
+        {todo.map((item) => {
+          return (
+            <TodoItem
+              deleteClick={handleDelete}
+              todo={todo}
+              setTodo={setTodo}
+              item={item}
+              key={item}
+            />
+          );
         })}
       </ul>
     </div>
