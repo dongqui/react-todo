@@ -10,28 +10,22 @@ const mockData = [];
 
 export default function App() {
   const [list, setList] = useState(mockData);
-  const [item, setItem] = useState('');
 
   const idRef = useRef(2);
 
-  const onChangeContent = (e) => {
-    setItem(e.target.value);
-  };
-
-  const onClickButton = () =>{
+  const onClickButton = (input) =>{
     setList([
       ...list,
       { 
         id:idRef.current++,
-        content:item,
+        content:input,
       }
     ]);
-    setItem('');
   }
 
   return (
     <div>
-      <TodoInput onChange={onChangeContent} onClick={onClickButton} item={item}/>
+      <TodoInput onClick={onClickButton}/>
       <ul>
         {list.map((item)=><TodoItem key={item.id} item={item.content}/>)}
       </ul>
