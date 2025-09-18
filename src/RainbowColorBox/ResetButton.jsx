@@ -1,0 +1,5 @@
+improt;
+
+function resetButton() {
+  return {};
+}
