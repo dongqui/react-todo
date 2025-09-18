@@ -1,11 +1,28 @@
-export default function TodoItem({ todoItem, deleteTodo }) {
+import { useState } from "react";
+import TodoEditForm from "./TodoEditForm";
+
+export default function TodoItem({ todoItem, deleteTodo, editTodo }) {
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
     <li>
-      {todoItem.todo}
-      <button type="button" onClick={() => deleteTodo(todoItem.id)}>
-        삭제
-      </button>
-      <button type="button">수정</button>
+      {isEditing === false ? (
+        <>
+          {todoItem.todo}
+          <button type="button" onClick={() => deleteTodo(todoItem.id)}>
+            삭제
+          </button>
+          <button type="button" onClick={() => setIsEditing(true)}>
+            수정
+          </button>
+        </>
+      ) : (
+        <TodoEditForm
+          todoItem={todoItem}
+          editTodo={editTodo}
+          setIsEditing={setIsEditing}
+        />
+      )}
     </li>
   );
 }

@@ -19,6 +19,14 @@ export default function App() {
     setTodoList((todoList) => todoList.filter((item) => item.id !== id));
   };
 
+  const editTodo = (id, newTodo) => {
+    setTodoList((prevTodoList) =>
+      prevTodoList.map((todoItem) =>
+        todoItem.id === id ? { ...todoItem, todo: newTodo } : todoItem
+      )
+    );
+  };
+
   return (
     <div>
       <TodoInput todo={todo} setTodo={setTodo} addTodo={addTodo} />
@@ -29,6 +37,7 @@ export default function App() {
               key={todoItem.id}
               todoItem={todoItem}
               deleteTodo={deleteTodo}
+              editTodo={editTodo}
             />
           ))
         ) : (
