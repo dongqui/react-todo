@@ -5,11 +5,11 @@ import "./App.css";
 import ResetButton from "./ResetButton";
 import ErrorMessage from "./ErrorMessage";
 
-const colors = ["red", "yellow", "green", "blue"];
-
 function App() {
   const [inputColor, setInputColor] = useState("");
-  const [isError, setIsError] = useState(false);
+  const colors = ["red", "yellow", "green", "blue"];
+
+  const isError = colors.includes(inputColor);
   const reset = () => {
     setInputColor("");
   };
@@ -22,17 +22,12 @@ function App() {
           onChange={(e) => {
             const value = e.target.value;
             setInputColor(value);
-
-            colors.filter((color) => {
-              color !== value;
-              return console.log(color);
-            });
           }}
         />
       </div>
       <ColorBox color={inputColor} />
       <ResetButton reset={reset} />
-      {isError && <ErrorMessage />}
+      {!isError && <ErrorMessage />}
     </div>
   );
 }
