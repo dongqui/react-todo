@@ -8,7 +8,7 @@ export default function TodoItem({ todoItem, deleteTodo, editTodo }) {
     <li>
       {isEditing === false ? (
         <>
-          {todoItem.todo}
+          {todoItem.title}
           <button type="button" onClick={() => deleteTodo(todoItem.id)}>
             삭제
           </button>

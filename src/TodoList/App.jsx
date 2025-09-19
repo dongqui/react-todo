@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
+import { getTodos } from "./api";
 
 let id = 0;
 
@@ -11,7 +12,7 @@ export default function App() {
   const addTodo = () => {
     if (todo.trim() === "") return;
 
-    setTodoList([...todoList, { id: id++, todo: todo }]);
+    setTodoList([...todoList, { id: id++, title: todo }]);
     setTodo("");
   };
 
@@ -26,6 +27,20 @@ export default function App() {
       )
     );
   };
+
+  useEffect(() => {
+    async function loadTodos() {
+      try {
+        const todos = await getTodos();
+        console.log(todos);
+        setTodoList(todos);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    loadTodos();
+  }, []);
 
   return (
     <div>
