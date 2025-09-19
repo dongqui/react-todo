@@ -1,10 +1,10 @@
-export default function TodoItem({data,onClick}) {
-
+export default function TodoItem({data, handleModify}) {
+  
   return (
     <li>
-      {data}
-      <button type="button" onClick={onClick}>삭제</button>
-      <button type="button">수정</button>
+      {data.content}
+      <button type="button">삭제</button>
+      <button type="button" handleModify={(e) => {handleModify(data.content)}}>수정</button>
     </li>
   );
 }
