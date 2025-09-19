@@ -11,9 +11,9 @@ const mockData = [];
 export default function App() {
   const [list, setList] = useState(mockData);
 
-  const idRef = useRef(2);
+  const idRef = useRef(1);
 
-  const onClickButton = (input) =>{
+  const onClickCreate = (input) =>{
     setList([
       ...list,
       { 
@@ -23,11 +23,17 @@ export default function App() {
     ]);
   }
 
+  const onClickDelete = (id) => {
+    setList(list.filter((item)=>
+      item.id!==id
+    ))
+  }
+
   return (
     <div>
-      <TodoInput onClick={onClickButton}/>
+      <TodoInput onClick={onClickCreate}/>
       <ul>
-        {list.map((item)=><TodoItem key={item.id} item={item.content}/>)}
+        {list.map((item)=><TodoItem key={item.id} onClick={onClickDelete} item={item}/>)}
       </ul>
     </div>
   );
