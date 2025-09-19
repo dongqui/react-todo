@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TodoEditForm from "./TodoEditForm";
 
-export default function TodoItem({ todoItem, deleteTodo, editTodo }) {
+export default function TodoItem({ todoItem, onDelete, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
@@ -9,7 +9,7 @@ export default function TodoItem({ todoItem, deleteTodo, editTodo }) {
       {isEditing === false ? (
         <>
           {todoItem.title}
-          <button type="button" onClick={() => deleteTodo(todoItem.id)}>
+          <button type="button" onClick={() => onDelete(todoItem.id)}>
             삭제
           </button>
           <button type="button" onClick={() => setIsEditing(true)}>
@@ -19,7 +19,7 @@ export default function TodoItem({ todoItem, deleteTodo, editTodo }) {
       ) : (
         <TodoEditForm
           todoItem={todoItem}
-          editTodo={editTodo}
+          onEdit={onEdit}
           setIsEditing={setIsEditing}
         />
       )}

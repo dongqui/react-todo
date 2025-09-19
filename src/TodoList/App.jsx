@@ -1,29 +1,31 @@
 import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
-import { getTodos } from "./api";
-
-let id = 0;
+import { addTodo, deleteTodo, getTodos, updateTodo } from "./api";
 
 export default function App() {
   const [todo, setTodo] = useState("");
   const [todoList, setTodoList] = useState([]);
 
-  const addTodo = () => {
-    if (todo.trim() === "") return;
-
-    setTodoList([...todoList, { id: id++, title: todo }]);
-    setTodo("");
+  const handledAddSucces = (newAddTodo) => {
+    console.log(newAddTodo);
+    setTodoList([...todoList, newAddTodo]);
   };
 
-  const deleteTodo = (id) => {
+  const handleDeleteTodo = async (id) => {
+    const result = await deleteTodo(id);
+    if (!result) return;
+
     setTodoList((todoList) => todoList.filter((item) => item.id !== id));
   };
 
-  const editTodo = (id, newTodo) => {
+  const handleEditTodo = async (id, editTodo) => {
+    const result = await updateTodo(id, editTodo);
+    if (!result) return;
+
     setTodoList((prevTodoList) =>
       prevTodoList.map((todoItem) =>
-        todoItem.id === id ? { ...todoItem, todo: newTodo } : todoItem
+        todoItem.id === id ? { ...todoItem, title: editTodo } : todoItem
       )
     );
   };
@@ -32,7 +34,6 @@ export default function App() {
     async function loadTodos() {
       try {
         const todos = await getTodos();
-        console.log(todos);
         setTodoList(todos);
       } catch (error) {
         console.log(error);
@@ -44,15 +45,20 @@ export default function App() {
 
   return (
     <div>
-      <TodoInput todo={todo} setTodo={setTodo} addTodo={addTodo} />
+      <TodoInput
+        todo={todo}
+        setTodo={setTodo}
+        onAdd={addTodo}
+        addSucces={handledAddSucces}
+      />
       <ul>
         {todoList.length > 0 ? (
           todoList.map((todoItem) => (
             <TodoItem
               key={todoItem.id}
               todoItem={todoItem}
-              deleteTodo={deleteTodo}
-              editTodo={editTodo}
+              onDelete={handleDeleteTodo}
+              onEdit={handleEditTodo}
             />
           ))
         ) : (

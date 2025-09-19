@@ -1,21 +1,21 @@
 import { useState } from "react";
 
-export default function TodoEditForm({ todoItem, editTodo, setIsEditing }) {
-  const [newTodo, setNewTodo] = useState(todoItem.todo);
+export default function TodoEditForm({ todoItem, onEdit, setIsEditing }) {
+  const [editTodo, setEditTodo] = useState(todoItem.title);
 
-  const changeTodo = (e) => {
-    setNewTodo(e.target.value);
+  const handleChangeTodo = (e) => {
+    setEditTodo(e.target.value);
   };
 
-  const sumitTodo = () => {
-    editTodo(todoItem.id, newTodo);
+  const handleSumitTodo = () => {
+    onEdit(todoItem.id, editTodo);
     setIsEditing(false);
   };
 
   return (
     <>
-      <input value={newTodo} onChange={changeTodo}></input>
-      <button type="button" onClick={sumitTodo}>
+      <input value={editTodo} onChange={handleChangeTodo}></input>
+      <button type="button" onClick={handleSumitTodo}>
         확인
       </button>
       <button type="button" onClick={() => setIsEditing(false)}>
