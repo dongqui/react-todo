@@ -1,10 +1,23 @@
-const Editor = () => {
+import {useState} from "react"
+
+const Editor = ({item, onClickUpdate, handleIsEditing}) => {
+  const [editedContent, setEditedContent] = useState(item.content);
+  
+  const handleEditConfirm = () =>{
+    onClickUpdate(item.id, editedContent)
+    handleIsEditing()
+  }
+
+  const handleEditedContent = (e) => {
+    setEditedContent(e.target.value)
+  }
+
   return (
-    <div>
-      <input/>
-      <button>확인</button>
-      <button>취소</button>
-    </div>
+    <li>
+      <input value={editedContent} onChange={handleEditedContent}/>
+      <button onClick={handleEditConfirm}>확인</button>
+      <button onClick={handleIsEditing}>취소</button>
+    </li>
   )
 }
 

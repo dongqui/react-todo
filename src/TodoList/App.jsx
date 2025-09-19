@@ -14,11 +14,11 @@ export default function App() {
 
   const onClickCreate = (input) =>{
     setList([
-      ...list,
       { 
         id:idRef.current++,
         content:input,
-      }
+      },
+      ...list,
     ]);
   }
 
@@ -28,13 +28,27 @@ export default function App() {
     ))
   }
 
-  
+  const onClickUpdate = (id, editedContent) => {
+    setList(list.map((item)=>
+      item.id===id
+      ?{
+        id:item.id,
+        content:editedContent
+      }
+      :item
+    ))
+  }
 
   return (
     <div>
       <TodoInput onClick={onClickCreate}/>
       <ul>
-        {list.map((item)=><TodoItem key={item.id} onClickDelete={onClickDelete} item={item}/>)}
+        {list.map((item)=><TodoItem 
+          key={item.id} 
+          onClickDelete={onClickDelete} 
+          onClickUpdate={onClickUpdate} 
+          item={item}
+        />)}
       </ul>
     </div>
   );
