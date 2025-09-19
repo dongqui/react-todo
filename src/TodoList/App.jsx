@@ -4,34 +4,29 @@ import TodoItem from "./TodoItem";
 
 export default function App() {
 
-  //입력값 받아오기
-  const [inputValue, setInputValue] = useState('');
-  const onChange = (e) => {
-    setInputValue(e.target.value);
-  }
-
-  //TodoItem 넘길 데이터 기본값
-  const [data, setInputData] = useState('');
-  const dataForm = [{
-    id: '',
-    content: '리액트 공부'
-  }]
+  // 데이터 기본값
+  const [data, setInputData] = useState([]);
 
   //입력값 데이터에 저장
-  const dataAdd = () => {
-    setInputData( inputValue, ...data)
+  const dataAdd = (id, content) => {
+    setInputData([ {id, content}, ...data ])
   }
 
-  //li 내용 바꾸기
-  const liContentChange = () => {
-
+  //삭제 버튼 누른 값 인식
+  const [deletBtn, setdeletBtn] = useState('');
+  const onClick = (e) => {
+    setdeletBtn(e.target.value);
   }
-  
+  //삭제 함수
+  const handleDelet = (datas) => {
+    datas.filter( data => data !== deletBtn);
+  }
+
   return (
     <div>
-      <TodoInput value={inputValue} onChange={onChange} onClick={dataAdd}/>
+      <TodoInput dataAdd={dataAdd}/>
       <ul>
-        <TodoItem data={data}/>
+        {data.map(item => <TodoItem onClick={onClick} key={item.id} data={item.content}/>)}
       </ul>
     </div>
   );
