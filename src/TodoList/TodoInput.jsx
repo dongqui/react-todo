@@ -1,13 +1,12 @@
 import { useState } from "react";
 
-let id = 0;
+let id = Date.now() % 100000;
 
 export default function TodoInput({ onCreate }) {
   const [inputValue, setInputValue] = useState("");
   const handleTodoAdd = () => {
     if (!inputValue) return;
     onCreate(inputValue, id);
-    id++;
     setInputValue("");
   };
   return (

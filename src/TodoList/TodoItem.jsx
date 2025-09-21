@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function TodoItem({ content, id, onDelete, onUpdate }) {
-  const [editValue, setEditValue] = useState(content);
+export default function TodoItem({ title, id, onDelete, onUpdate }) {
+  const [editValue, setEditValue] = useState(title);
   const [isUpdate, setIsUpdate] = useState(false);
   const handleDelete = () => onDelete(id);
   const handleUpdate = () => {
@@ -15,7 +15,7 @@ export default function TodoItem({ content, id, onDelete, onUpdate }) {
     <li>
       {!isUpdate ? (
         <div>
-          {content}
+          {title}
           <button type="button" onClick={handleUpdate}>
             수정
           </button>
