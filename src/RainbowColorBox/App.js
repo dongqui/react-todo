@@ -5,13 +5,32 @@ import ResetButton from "./ResetButton";
 
 function App() {
   const [rainbow, setRainbow] = useState("");
+  const [error, setError] = useState("");
+
+  const rainbowColors = [
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "indigo",
+    "purple",
+  ];
 
   function handleRainbow(e) {
-    setRainbow(e.target.value);
+    const inputColor = e.target.value;
+    setRainbow(inputColor);
+
+    if (inputColor === "" || rainbowColors.includes(inputColor)) {
+      setError("");
+    } else {
+      setError("X 무지개색이 아닙니다!");
+    }
   }
 
   function handleReset() {
     setRainbow("");
+    setError("");
   }
   return (
     <div className="App">
@@ -20,6 +39,7 @@ function App() {
         <ResetButton onReset={handleReset}>초기화</ResetButton>
         <input onChange={handleRainbow} value={rainbow} />
       </div>
+      {error && <p className="error">{error}</p>}
       <ColorBox color={rainbow} />
     </div>
   );
@@ -31,3 +51,4 @@ export default App;
 //2단계 . 자식 컴포넌트에 props 전달
 //3단계 . 입력창과 state 연결 준비
 //4단계 . 추가 이벤트(리셋 버튼) 다루기
+//5단계 . 에러메시지 표출 빨주노초파남보 무지개색이 아닌게 들어오면 에러메시지 표출.
