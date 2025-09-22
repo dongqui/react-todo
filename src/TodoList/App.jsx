@@ -11,25 +11,29 @@ export default function App() {
   const dataAdd = (id, content) => {
     setInputData([ {id, content}, ...data ])
   }
-  //삭제하기
-  //삭제 함수 다시 작성
-  // const handleDelet = (datas) => {
 
-  // }
+  //삭제하기
+  const handleDelete = (targetId) => {
+    const nextData = data.filter((item) => item.id !== targetId);
+    setInputData(nextData);
+  }
 
   //수정하기
-  //수정 버튼 누르면 content 내용 담긴 input 생성
-
-  const [modify , setModify]= useState(data.content);
-  const handleModify = () => {
-    setModify(<input>content</input>)
-  }
+  const handleModify = (targetId, newContent) => {
+    const nextData = data.map((item) => {
+      if (item.id === targetId) {
+        return { ...item, content: newContent };
+      }
+      return item;
+    });
+    setInputData(nextData);
+  };
   
   return (
     <div>
       <TodoInput dataAdd={dataAdd}/>
       <ul>
-        {data.map(item => <TodoItem handleModify={handleModify} key={item.id} data={item}/>)}
+        {data.map(item => <TodoItem handleDelete={handleDelete} handleModify={handleModify} key={item.id} data={item}/>)}
       </ul>
     </div>
   );

@@ -10,7 +10,9 @@ export default function TodoInput({dataAdd}) {
       setInputValue(e.target.value);
     }
     function handleClick () {
+      if(inputValue === ''){ return}
       dataAdd(id++, inputValue);
+      setInputValue('');
     }
 
   return (
