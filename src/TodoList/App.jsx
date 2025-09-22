@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 
@@ -15,9 +15,16 @@ export default function App() {
 
   //filter 함수로 리스트의 값과 일치하지 않는 목록들만 가지고 재렌더링 유도
   function handleDelete(item) {
-    const newToDoList = todo.filter((target) => target !== item);
+    const newToDoList = todo.filter((target) => target.id !== item);
     setTodo(newToDoList);
   }
+
+  // fetch로 데이터 받아오기
+  useEffect(() => {
+    fetch('/todos')
+      .then((res) => res.json())
+      .then((data) => setTodo(data));
+  }, []);
 
   return (
     <div>
@@ -29,8 +36,8 @@ export default function App() {
               deleteClick={handleDelete}
               todo={todo}
               setTodo={setTodo}
-              item={item}
-              key={item}
+              item={item.title}
+              key={item.id}
             />
           );
         })}
