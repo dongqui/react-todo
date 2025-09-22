@@ -3,38 +3,57 @@
 //todoInput의 입력 버튼을 누르면 state를 todoItem 컴포넌트에 전달/노출
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
-import {useState, useRef} from "react";
-
-const mockData = [];
+import {useState, useEffect} from "react";
 
 export default function App() {
-  const [list, setList] = useState(mockData);
+  const [list, setList] = useState([]);
+  // const idRef = useRef(1);
 
-  const idRef = useRef(1);
+  useEffect(()=>{
+    async function getData (){
+      const res = await fetch('/todos');
+      const todos = await res.json();
 
-  const onClickCreate = (input) =>{
+      setList(todos);
+    }
+    getData();
+  },[])
+
+  const onClickCreate = async (input) =>{
+    const res = await fetch('/todos',{
+      method:"POST",
+      body:JSON.stringify({title:input})
+    })
+    const todo = await res.json()
     setList([
-      { 
-        id:idRef.current++,
-        content:input,
-      },
+      todo,
       ...list,
     ]);
   }
 
-  const onClickDelete = (id) => {
+  const onClickDelete = async (id) => {
+    const res = await fetch(`/todos/${id}`,{
+      method:"DELETE",
+    })
+    const todo = await res.json()
+
     setList(list.filter((item)=>
-      item.id!==id
+      item.id!==todo.id
     ))
   }
 
-  const onClickUpdate = (id, editedContent) => {
+  const onClickUpdate = async (id, editedContent) => {
+    const res = await fetch(`/todos/${id}`,{
+      method:"PATCH",
+      body:JSON.stringify({
+        title:editedContent
+      })
+    });
+    const todo = await res.json();
+
     setList(list.map((item)=>
-      item.id===id
-      ?{
-        id:item.id,
-        content:editedContent
-      }
+      item.id===todo.id
+      ?todo
       :item
     ))
   }

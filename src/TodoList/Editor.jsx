@@ -1,7 +1,7 @@
 import {useState} from "react"
 
 const Editor = ({item, onClickUpdate, handleIsEditing}) => {
-  const [editedContent, setEditedContent] = useState(item.content);
+  const [editedContent, setEditedContent] = useState(item.title);
   
   const handleEditConfirm = () =>{
     onClickUpdate(item.id, editedContent)

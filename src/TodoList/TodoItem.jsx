@@ -13,8 +13,6 @@ export default function TodoItem({item, onClickDelete, onClickUpdate}) {
     setIsEditing(!isEditing)
   }
 
-
-
   return (
     (isEditing)
     ?(<Editor 
@@ -24,7 +22,7 @@ export default function TodoItem({item, onClickDelete, onClickUpdate}) {
       />)
     :(
       <li>
-        {item.content}
+        {item.title}
         <button type="button" onClick={handleClickDelete}>삭제</button>
         <button type="button" onClick={handleIsEditing}>수정</button>
       </li>
