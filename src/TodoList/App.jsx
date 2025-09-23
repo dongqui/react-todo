@@ -1,11 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
+import data from './TodoMockServer/browser.js'; 
 
 export default function App() {
 
   // 데이터 기본값
   const [data, setInputData] = useState([]);
+
+  // API에서 데이터를 가져오기
+  useEffect(() => {
+    async function fetchTodos() {
+      const response = await fetch(data);
+      const result = await response.json();
+      const { id, title } = data; 
+      //데이터 넣기
+      setInputData(result.todos);
+    }
+    
+    fetchTodos();
+  }, []); 
+
+
 
   //입력값 데이터에 저장
   const dataAdd = (id, content) => {
