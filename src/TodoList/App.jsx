@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
-import data from './TodoMockServer/browser.js'; 
 
 export default function App() {
 
@@ -11,34 +10,39 @@ export default function App() {
   // API에서 데이터를 가져오기
   useEffect(() => {
     async function fetchTodos() {
-      const response = await fetch(data);
+      const response = await fetch('/todos');
       const result = await response.json();
-      const { id, title } = data; 
       //데이터 넣기
-      setInputData(result.todos);
+      setInputData(result);
     }
     
     fetchTodos();
   }, []); 
 
-
-
   //입력값 데이터에 저장
-  const dataAdd = (id, content) => {
-    setInputData([ {id, content}, ...data ])
+  const dataAdd = (id, title) => {
+    setInputData([ {id, title}, ...data ])
   }
 
   //삭제하기
-  const handleDelete = (targetId) => {
+  const handleDelete = async(targetId) => {
+    const response = await fetch(`/todos/:id`, {
+      method: 'DELETE',
+    });
+    const result = await response.json();
     const nextData = data.filter((item) => item.id !== targetId);
     setInputData(nextData);
   }
 
   //수정하기
-  const handleModify = (targetId, newContent) => {
+  const handleModify = async(targetId, newContent) => {
+    const response = await fetch(`/todos/:id`, {
+      method: 'PATCH',
+    });
+    const result = await response.json();
     const nextData = data.map((item) => {
       if (item.id === targetId) {
-        return { ...item, content: newContent };
+        return { ...item, title: newContent };
       }
       return item;
     });

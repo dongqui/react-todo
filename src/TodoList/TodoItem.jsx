@@ -34,7 +34,7 @@ export default function TodoItem({data, handleDelete, handleModify}) {
         </>
         ) : (
           <>
-            <span>{data.content}</span>
+            <span>{data.title}</span>
             <button onClick={handleDeleteBtn}>삭제</button>
             <button onClick={handleModifyBtn}>수정</button>
           </>
