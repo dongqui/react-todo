@@ -1,8 +1,7 @@
-export default function TodoItem({ value, handleClick }) {
-  const addText = () => {};
+export default function TodoItem({ todo }) {
   return (
     <li>
-      {addText()}
+      {todo}
       <button type="button">삭제</button>
       <button type="button">수정</button>
     </li>

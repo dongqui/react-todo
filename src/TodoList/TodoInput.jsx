@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import TodoItem from './TodoItem';
+import { useState, useRef } from 'react';
 
 let id = 0;
 
-export default function TodoInput() {
+export default function TodoInput({ handleClick }) {
   const [input, setInput] = useState('');
 
   const onChangeInput = (e) => {
@@ -11,15 +10,16 @@ export default function TodoInput() {
     console.log(e.target.value);
   };
 
-  const handleClick = (e) => {
+  const onClickButton = (e) => {
     e.preventDefault();
-    setInput(e.target.value);
+    const content = input;
+    handleClick(content);
   };
 
   return (
     <>
       <input onChange={onChangeInput} value={input} />
-      <button onClick={handleClick}>입력</button>
+      <button onClick={onClickButton}>입력</button>
     </>
   );
 }

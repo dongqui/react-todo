@@ -1,15 +1,21 @@
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
-// import { useState } from 'react';
+import { useState } from 'react';
 
-export default function App() {
-  // const [todos, setTodos] = useState([]);
+export default function App({ handleClick }) {
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (data) => {
+    setTodos([data, ...todos]);
+  };
 
   return (
     <div>
-      <TodoInput />
+      <TodoInput handleClick={addTodo} />
       <ul>
-        <TodoItem />
+        {todos.map((todo) => (
+          <TodoItem todo={todo} />
+        ))}
       </ul>
     </div>
   );
