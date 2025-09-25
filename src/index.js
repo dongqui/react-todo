@@ -13,6 +13,6 @@ async function prepare() {
 
 prepare().then(() => {
   const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(<RainbowColorBoxApp />);
-  // root.render(<TodoListApp />);
+  // root.render(<RainbowColorBoxApp />);
+  root.render(<TodoListApp />);
 });
